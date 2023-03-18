@@ -12,6 +12,7 @@ from .permissions import ProductPermission
 class ProductView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, ProductPermission]
+    http_method_names = ["get", "post"]
 
     queryset = Product.objects.all()
     serializer_class = ProductSerialzier
@@ -25,6 +26,7 @@ class ProductView(generics.ListCreateAPIView):
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, ProductPermission]
+    http_method_names = ["get", "patch", "delete"]
 
     queryset = Product.objects.all()
     serializer_class = ProductSerialzier
