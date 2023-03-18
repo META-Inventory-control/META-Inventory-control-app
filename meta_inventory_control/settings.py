@@ -21,7 +21,7 @@ dotenv.load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["meta-inventory-control-app-production.up.railway.app", "0.0.0.0"]
 
 RAILWAY_STATIC_URL = os.getenv("RAILWAY_STATIC_URL")
 
