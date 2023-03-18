@@ -23,6 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 ALLOWED_HOSTS = ["meta-inventory-control-app-production.up.railway.app", "0.0.0.0"]
 
+APPEND_SLASH = False
+
 RAILWAY_STATIC_URL = os.getenv("RAILWAY_STATIC_URL")
 
 if RAILWAY_STATIC_URL:
