@@ -15,13 +15,18 @@ import os
 import dotenv
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
+from datetime import timedelta
 
 dotenv.load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = ["meta-inventory-control-app-production.up.railway.app", "0.0.0.0"]
+ALLOWED_HOSTS = [
+    "meta-inventory-control-app-production.up.railway.app",
+    "0.0.0.0",
+    "localhost",
+]
 
 APPEND_SLASH = False
 
@@ -140,6 +145,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
