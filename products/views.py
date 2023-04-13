@@ -5,6 +5,7 @@ from .serializers import ProductSerialzier
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .permissions import ProductPermission
+from groups.models import Group
 
 # Create your views here.
 
