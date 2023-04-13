@@ -19,9 +19,12 @@ class ProductView(generics.ListCreateAPIView):
     serializer_class = ProductSerialzier
 
     def perform_create(self, serializer):
+        # Lógica do código
+        productsList = Product.objects.all()
+
         # Lógica do preço final
         final_cost = float(self.request.data["entry_cost"]) * 2
-        serializer.save(final_cost=final_cost)
+        serializer.save(final_cost=final_cost, code=f"MT{productsList.count() + 1}")
 
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
