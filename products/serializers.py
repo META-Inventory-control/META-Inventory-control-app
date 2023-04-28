@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Product
+from historic.models import Historic
 
 
 class ProductSerialzier(serializers.ModelSerializer):
@@ -34,6 +35,7 @@ class ProductSerialzier(serializers.ModelSerializer):
         for key, value in validated_data.items():
             setattr(instance, key, value)
         instance.save()
+
         return instance
 
     class Meta:
