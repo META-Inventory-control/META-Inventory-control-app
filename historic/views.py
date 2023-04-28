@@ -19,7 +19,7 @@ class HistoricView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         product = get_object_or_404(Product, pk=self.request._data["product"])
-        product.qty = self.request._data["qty"]
+        product.qty = product.qty - self.request._data["qty"]
         product.save()
 
         serializer.save()
