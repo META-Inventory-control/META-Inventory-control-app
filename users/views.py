@@ -15,11 +15,13 @@ from .permissions import UserDetailPermission
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    http_method_names = ["get", "post"]
 
 
 class UserListView(ListAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsAdminUser]
+    http_method_names = ["get"]
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -28,6 +30,7 @@ class UserListView(ListAPIView):
 class UserDetailView(RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, UserDetailPermission]
+    http_method_names = ["get", "patch", "delete"]
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
