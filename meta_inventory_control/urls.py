@@ -23,6 +23,7 @@ urlpatterns = [
     path("api/", include("users.urls")),
     path("api/", include("products.urls")),
     path("api/", include("groups.urls")),
+    path("api/", include("historic.urls")),
 ]
 
 if settings.DEBUG:
