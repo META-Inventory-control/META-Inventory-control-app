@@ -10,6 +10,8 @@ class Product(models.Model):
     entry_cost = models.DecimalField(null=False, max_digits=7, decimal_places=2)
     final_cost = models.DecimalField(null=True, max_digits=7, decimal_places=2)
     qty = models.IntegerField(null=False)
+    min_qty = models.IntegerField(null=False)
+    description = models.CharField(null=True, max_length=220)
     image = models.ImageField(null=True, max_length=30)
     group = models.ForeignKey(
         "groups.Group", on_delete=models.CASCADE, related_name="products", default=None
