@@ -13,6 +13,7 @@ class ProductSerialzier(serializers.ModelSerializer):
 
     def update(self, instance: Product, validated_data: dict):
         entry_cost = validated_data.pop("entry_cost", None)
+        final_cost_pop = validated_data.pop("final_cost", None)
         multipliers = get_object_or_404(Multipliers, pk=1)
         # Lógica do final price
         if entry_cost:
@@ -59,6 +60,13 @@ class ProductSerialzier(serializers.ModelSerializer):
                     "final_cost",
                     entry_cost * multipliers.multi_6001_8 / 100 + entry_cost,
                 )
+
+        if entry_cost and not final_cost_pop:
+            setattr(instance, "final_cost_altered", False)
+
+        if final_cost_pop:
+            setattr(instance, "final_cost_altered", True)
+            setattr(instance, "final_cost", final_cost_pop)
 
         for key, value in validated_data.items():
             setattr(instance, key, value)

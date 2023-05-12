@@ -9,6 +9,7 @@ class Product(models.Model):
     name = models.CharField(null=False, max_length=100, unique=True)
     entry_cost = models.DecimalField(null=False, max_digits=7, decimal_places=2)
     final_cost = models.DecimalField(null=True, max_digits=7, decimal_places=2)
+    final_cost_altered = models.BooleanField(default=False)
     qty = models.IntegerField(null=False)
     min_qty = models.IntegerField(null=False)
     description = models.CharField(null=True, max_length=220)
