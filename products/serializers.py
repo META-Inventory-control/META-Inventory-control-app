@@ -15,11 +15,11 @@ class ProductSerialzier(serializers.ModelSerializer):
         if entry_cost:
             setattr(instance, "entry_cost", entry_cost)
             if entry_cost <= 50:
-                setattr(instance, "final_cost", entry_cost * 6)
+                setattr(instance, "final_cost", entry_cost * 6 + entry_cost)
             elif entry_cost > 50 and entry_cost <= 150:
-                setattr(instance, "final_cost", entry_cost * 3)
+                setattr(instance, "final_cost", entry_cost * 3 + entry_cost)
             elif entry_cost > 151 and entry_cost <= 700:
-                setattr(instance, "final_cost", entry_cost * 3)
+                setattr(instance, "final_cost", entry_cost * 2 + entry_cost)
             elif entry_cost > 701 and entry_cost <= 1500:
                 calc = float(entry_cost) * 1.5
                 setattr(instance, "final_cost", float(entry_cost) + calc)

@@ -31,13 +31,13 @@ class ProductView(generics.ListCreateAPIView):
         entry_cost = float(self.request.data["entry_cost"])
 
         if entry_cost <= 50:
-            final_cost = entry_cost * 6
+            final_cost = entry_cost * 6 + entry_cost
         elif entry_cost > 50 and entry_cost <= 150:
-            final_cost = entry_cost * 3
+            final_cost = entry_cost * 3 + entry_cost
         elif entry_cost > 151 and entry_cost <= 700:
-            final_cost = entry_cost * 2
+            final_cost = entry_cost * 2 + entry_cost
         elif entry_cost > 701 and entry_cost <= 1500:
-            final_cost = entry_cost * 1.5
+            final_cost = entry_cost * 1.5 + entry_cost
         elif entry_cost > 1501 and entry_cost <= 3000:
             calc = entry_cost * 0.85
             final_cost = entry_cost + calc
