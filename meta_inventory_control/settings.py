@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "products",
     "groups",
     "historic",
+    "multipliers",
 ]
 
 MIDDLEWARE = [
