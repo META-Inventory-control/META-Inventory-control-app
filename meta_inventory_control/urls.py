@@ -24,6 +24,7 @@ urlpatterns = [
     path("api/", include("products.urls")),
     path("api/", include("groups.urls")),
     path("api/", include("historic.urls")),
+    path("api/", include("multipliers.urls")),
 ]
 
 if settings.DEBUG:
