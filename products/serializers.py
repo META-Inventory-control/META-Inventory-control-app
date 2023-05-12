@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Product
 from historic.models import Historic
+from django.shortcuts import get_object_or_404
+from multipliers.models import Multipliers
 
 
 class ProductSerialzier(serializers.ModelSerializer):
@@ -11,27 +13,52 @@ class ProductSerialzier(serializers.ModelSerializer):
 
     def update(self, instance: Product, validated_data: dict):
         entry_cost = validated_data.pop("entry_cost", None)
+        multipliers = get_object_or_404(Multipliers, pk=1)
         # Lógica do final price
         if entry_cost:
             setattr(instance, "entry_cost", entry_cost)
             if entry_cost <= 50:
-                setattr(instance, "final_cost", entry_cost * 6 + entry_cost)
+                setattr(
+                    instance,
+                    "final_cost",
+                    entry_cost * multipliers.multi_0_50 / 100 + entry_cost,
+                )
             elif entry_cost > 50 and entry_cost <= 150:
-                setattr(instance, "final_cost", entry_cost * 3 + entry_cost)
+                setattr(
+                    instance,
+                    "final_cost",
+                    entry_cost * multipliers.multi_51_150 / 100 + entry_cost,
+                )
             elif entry_cost > 151 and entry_cost <= 700:
-                setattr(instance, "final_cost", entry_cost * 2 + entry_cost)
+                setattr(
+                    instance,
+                    "final_cost",
+                    entry_cost * multipliers.multi_151_700 / 100 + entry_cost,
+                )
             elif entry_cost > 701 and entry_cost <= 1500:
-                calc = float(entry_cost) * 1.5
-                setattr(instance, "final_cost", float(entry_cost) + calc)
+                setattr(
+                    instance,
+                    "final_cost",
+                    entry_cost * multipliers.multi_701_1500 / 100 + entry_cost,
+                )
             elif entry_cost > 1501 and entry_cost <= 3000:
-                calc = float(entry_cost) * 0.85
-                setattr(instance, "final_cost", float(entry_cost) + calc)
+                setattr(
+                    instance,
+                    "final_cost",
+                    entry_cost * multipliers.multi_1501_3000 / 100 + entry_cost,
+                )
             elif entry_cost > 3001 and entry_cost <= 6000:
-                calc = float(entry_cost) * 0.6
-                setattr(instance, "final_cost", float(entry_cost) + calc)
+                setattr(
+                    instance,
+                    "final_cost",
+                    entry_cost * multipliers.multi_3001_6000 / 100 + entry_cost,
+                )
             elif entry_cost > 6000:
-                calc = float(entry_cost) * 0.45
-                setattr(instance, "final_cost", float(entry_cost) + calc)
+                setattr(
+                    instance,
+                    "final_cost",
+                    entry_cost * multipliers.multi_6001_8 / 100 + entry_cost,
+                )
 
         for key, value in validated_data.items():
             setattr(instance, key, value)
