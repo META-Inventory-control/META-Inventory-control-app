@@ -10,7 +10,7 @@ from .serializers import GroupSerialzier
 
 class GroupView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticated]
     http_method_names = ["get", "post"]
 
     queryset = Group.objects.all()
